@@ -9,9 +9,11 @@ const styles = (theme) => ({
 		display: "flex",
 		background: "#131921",
 		position: "sticky",
+		top: "0",
 		alignItems: "center",
 		width: "100%",
 		height: "4em",
+		zIndex: "999",
 	},
 	rootLogo: {
 		height: "100%",

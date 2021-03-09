@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 //pages and components
 
-import Header from "./components/header/Header";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 
 function App() {
