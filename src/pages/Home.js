@@ -23,12 +23,12 @@ const styles = (theme) => ({
 		},
 	},
 	itemsMainContainer: {
-		margin: "-50vh auto",
+		margin: "-50vh auto 20px",
 		width: "97%",
 		zIndex: "0",
 	},
 	itemsContainer: {
-		margin: "15px auto",
+		margin: "15px auto 0",
 		display: "flex",
 		width: "100%",
 		justifyContent: "space-around",

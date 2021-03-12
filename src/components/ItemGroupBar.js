@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ToolTip from "@material-ui/core/Tooltip";
 import CountDown from "react-countdown";
 import ChevronleftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import data from "../pages/data";
 
 const styles = (theme) => ({
 	root: {
@@ -96,17 +95,21 @@ const styles = (theme) => ({
 		"&::-webkit-scrollbar-track": {
 			background: "#ffffff",
 			borderRadius: "10px",
-			boxShadow: "inset 7px 10px 12px #f0f0f0",
+			boxShadow: "inset 7px 10px 12px transparent",
 		},
 	},
 	btn: {
 		display: "flex",
 		position: "absolute",
-		background: "rgba(255,255,255,0.4)",
+		background: "rgb(255,255,255)",
 		top: "50%",
+		transform: "translate(0,-50%)",
+		transition: "all 0.5s",
 		zIndex: 2,
+		boxShadow: "1px 10px 20px gray",
+		opacity: "0.4",
 		"&:hover": {
-			background: "rgba(255,255,255,1)",
+			opacity: "1",
 		},
 		"& .icon": {
 			fontSize: "40px",
@@ -117,6 +120,34 @@ const styles = (theme) => ({
 function ItemGroupBar(props) {
 	const classes = props.classes;
 	const { mainTitle, mainPageLink, child } = props.data;
+	const divRef = useRef(null);
+	const mainRef = useRef(null);
+	const [disabled, setDisabled] = useState({
+		disabledLeft: false,
+		disabledRight: false,
+	});
+
+	const disableButton = () => {
+		if (divRef.current.scrollLeft === 0) {
+			setDisabled({ disabledLeft: true, disabledRight: false });
+		} else if (
+			divRef.current.scrollLeft + divRef.current.clientWidth ===
+			divRef.current.scrollWidth
+		) {
+			setDisabled({ disabledRight: true, disabledLeft: false });
+		} else {
+			setDisabled({ disabledLeft: false, disabledRight: false });
+		}
+	};
+
+	const scrollHandler = (x) => {
+		divRef.current.scrollBy({ top: "0", left: x, behavior: "smooth" });
+	};
+
+	useEffect(() => {
+		divRef.current.scrollLeft = 50;
+		disableButton();
+	}, []);
 
 	let childrens = child.map((datum, index) => {
 		const { img, priceStart, priceEnd, endsAt, discount } = datum;
@@ -143,26 +174,38 @@ function ItemGroupBar(props) {
 	});
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} ref={mainRef}>
 			<div className={classes.rootTitle}>
 				<span>{mainTitle}</span>
 				<a href={mainPageLink}>See all deals</a>
 			</div>
-			<div className={classes.rootItemsContainer}>
+			<div
+				className={classes.rootItemsContainer}
+				ref={divRef}
+				onScroll={() => {
+					disableButton();
+				}}
+			>
 				<div className="items">{childrens}</div>
 			</div>
 			<div className={classes.btn} style={{ float: "left", left: 5 }}>
-				<ToolTip title="Previous" enterDelay={300} arrow>
-					<Button>
-						<ChevronleftIcon fontSize="large" classsName="icon" />
-					</Button>
+				<ToolTip title="Previous">
+					<IconButton
+						onClick={() => scrollHandler(-500)}
+						disabled={disabled.disabledLeft}
+					>
+						<ChevronleftIcon fontSize="large" className="icon" />
+					</IconButton>
 				</ToolTip>
 			</div>
 			<div className={classes.btn} style={{ float: "right", right: 5 }}>
-				<ToolTip title="Next" enterDelay={300} arrow>
-					<Button>
-						<ChevronRightIcon fontSize="large" classsName="icon" />
-					</Button>
+				<ToolTip title="Next">
+					<IconButton
+						onClick={() => scrollHandler(500)}
+						disabled={disabled.disabledRight}
+					>
+						<ChevronRightIcon fontSize="large" className="icon" />
+					</IconButton>
 				</ToolTip>
 			</div>
 		</div>
