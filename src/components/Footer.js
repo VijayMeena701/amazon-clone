@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import FooterModal from "./footerModals/FooterModal";
 
 const styles = (theme) => ({
 	root: {
@@ -37,7 +38,12 @@ const styles = (theme) => ({
 	},
 	footerMainContainer: {
 		color: "white",
-		width: "100%",
+		width: "75%",
+		margin: "3em auto 0",
+		"& .footerItem": {
+			alignItems: "left",
+			justifyContent: "left",
+		},
 		"& ul": {
 			disply: "flex",
 			flexDirection: "column",
@@ -51,9 +57,15 @@ const styles = (theme) => ({
 				lineHeight: "1.5em",
 				"& a": {
 					cursor: "pointer",
+					color: "white",
+					textDecoration: "none",
 				},
 			},
 		},
+	},
+	dividerLine: {
+		borderTop: "1px solid #3a4553",
+		marginTop: "40px",
 	},
 });
 
@@ -69,7 +81,11 @@ function Footer(props) {
 	return (
 		<div className={classes.root}>
 			<div className={classes.rootContainer}>
-				<div className="backtoTop" onClick={backtoTopClickHandler}>
+				<div
+					ref={ref}
+					className="backtoTop"
+					onClick={backtoTopClickHandler}
+				>
 					<p>Back to top</p>
 				</div>
 				<Grid
@@ -82,12 +98,11 @@ function Footer(props) {
 						container
 						item
 						justify="center"
-						sm={12}
-						md={6}
-						lg={12}
-						spacing={4}
+						xs={12}
+						md={3}
+						className="footerItem"
 					>
-						<Grid item={true} justify="left">
+						<Grid item={true}>
 							<Typography
 								variant="body1"
 								style={{ fontWeight: "700" }}
@@ -97,138 +112,190 @@ function Footer(props) {
 							<ul>
 								<li>
 									<p>
-										<a>About us</a>
+										<a href="# ">About us</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>careers</a>
+										<a href="# ">careers</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>press Releases</a>
+										<a href="# ">press Releases</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Amazon Careers</a>
+										<a href="# ">Amazon Careers</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Send a Gift</a>
+										<a href="# ">Send a Gift</a>
 									</p>
 								</li>
 							</ul>
 						</Grid>
-						<Grid item={true} justify="left">
+					</Grid>
+					<Grid
+						container
+						item
+						justify="center"
+						xs={12}
+						md={3}
+						className="footerItem"
+					>
+						<Grid item={true}>
 							<Typography
 								variant="body1"
 								style={{ fontWeight: "700" }}
 							>
-								Get to Know Us
+								Contact with Us
 							</Typography>
 							<ul>
 								<li>
 									<p>
-										<a>About us</a>
+										<a href="# ">Facebook</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>careers</a>
+										<a href="# ">Twitter</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>press Releases</a>
-									</p>
-								</li>
-								<li>
-									<p>
-										<a>Amazon Careers</a>
-									</p>
-								</li>
-								<li>
-									<p>
-										<a>Send a Gift</a>
+										<a href="# ">Instagram</a>
 									</p>
 								</li>
 							</ul>
 						</Grid>
-						<Grid item={true} justify="left">
+					</Grid>
+					<Grid
+						container
+						item
+						justify="center"
+						xs={12}
+						md={3}
+						className="footerItem"
+					>
+						<Grid item={true}>
 							<Typography
 								variant="body1"
 								style={{ fontWeight: "700" }}
 							>
-								Get to Know Us
+								Make Money with Us
 							</Typography>
 							<ul>
 								<li>
 									<p>
-										<a>About us</a>
+										<a href="# ">Sell on Amazon</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>careers</a>
+										<a href="# ">
+											Sell under Amazon Accelerator
+										</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>press Releases</a>
+										<a href="# ">Amazon Global Selling</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Amazon Careers</a>
+										<a href="# ">Become an Affiliate</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Send a Gift</a>
+										<a href="# ">Fulfilment by Amazon</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<a href="# ">Advertise your Products</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<a href="# ">Amazon Pay on Merchants</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<a href="# ">
+											See more Make Money with Us
+										</a>
 									</p>
 								</li>
 							</ul>
 						</Grid>
-						<Grid item={true} justify="left">
+					</Grid>
+					<Grid
+						container
+						item
+						justify="center"
+						xs={12}
+						md={3}
+						className="footerItem"
+					>
+						<Grid item={true}>
 							<Typography
 								variant="body1"
 								style={{ fontWeight: "700" }}
 							>
-								Get to Know Us
+								Let Us Help You
 							</Typography>
 							<ul>
 								<li>
 									<p>
-										<a>About us</a>
+										<a href="# ">Covid-19 and Amazon</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>careers</a>
+										<a href="# ">Your Account</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>press Releases</a>
+										<a href="# ">Returns Center</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Amazon Careers</a>
+										<a href="# ">
+											100% Purchase Protection
+										</a>
 									</p>
 								</li>
 								<li>
 									<p>
-										<a>Send a Gift</a>
+										<a href="# ">Amazon App Download</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<a href="# ">
+											Amazon Assistant Download
+										</a>
+									</p>
+								</li>
+								<li>
+									<p>
+										<a href="# ">Help</a>
 									</p>
 								</li>
 							</ul>
 						</Grid>
 					</Grid>
 				</Grid>
+				<div className={classes.dividerLine}></div>
+				<FooterModal />
 			</div>
 		</div>
 	);
